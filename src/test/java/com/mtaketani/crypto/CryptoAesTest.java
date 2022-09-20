@@ -6,7 +6,7 @@ package com.mtaketani.crypto;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CryptTest {
+class CryptAesTest {
     @Test
     void 暗号化復号化で元に戻るかのテスト() {
         String encryptoText = CryptoAes.encrypto("test");
