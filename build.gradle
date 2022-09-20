@@ -9,9 +9,12 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    id 'maven-publish'
 }
 
-version = '0.1.0'
+group 'com.mtaketani'
+archivesBaseName = 'crypto'
+version '0.1.0'
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -30,6 +33,27 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:31.0.1-jre'
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "Github"
+            url = uri("https://maven.pkg.github.com/mtaketani113/crypto")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        register("jar", MavenPublication) {
+            from(components["java"])
+            pom {
+                url.set("https://github.com/mtaketani113/crypto.git")
+            }
+        }
+    }
 }
 
 tasks.named('test') {
