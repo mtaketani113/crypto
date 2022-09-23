@@ -14,7 +14,7 @@ plugins {
 
 group 'com.mtaketani'
 archivesBaseName = 'crypto'
-version '0.2.0'
+version '0.3.0'
 
 repositories {
     // Use Maven Central for resolving dependencies.
