@@ -1,6 +1,9 @@
 package com.mtaketani.crypto;
 
 import org.junit.jupiter.api.Test;
+
+import com.mtaketani.crypto.exception.CryptoException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CryptRsaTest {
@@ -22,5 +25,25 @@ class CryptRsaTest {
         String encryptoText = CryptoRsa.encryptoByPrivate("test", keyPairRsa.getPrivateKey());
         String decryptoText = CryptoRsa.decryptoByPublic(encryptoText, keyPairRsa.getPublicKey());
         assertEquals("test", decryptoText);
+    }
+
+    @Test
+    void 秘密鍵で暗号化ー秘密鍵復号化でException発生() {
+
+        KeyPairRsa keyPairRsa = CryptoRsa.createKeyPair();
+
+        String encryptoText = CryptoRsa.encryptoByPrivate("test", keyPairRsa.getPrivateKey());
+        assertThrows(CryptoException.class
+            , () -> CryptoRsa.decryptoByPrivate(encryptoText, keyPairRsa.getPrivateKey()));
+    }
+
+    @Test
+    void 公開鍵で暗号化ー公開鍵復号化でException発生() {
+
+        KeyPairRsa keyPairRsa = CryptoRsa.createKeyPair();
+
+        String encryptoText = CryptoRsa.encryptoByPbulic("test", keyPairRsa.getPublicKey());
+        assertThrows(CryptoException.class
+            , () -> CryptoRsa.decryptoByPublic(encryptoText, keyPairRsa.getPublicKey()));
     }
 }
