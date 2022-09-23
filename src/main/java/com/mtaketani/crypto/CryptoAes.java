@@ -1,11 +1,21 @@
 package com.mtaketani.crypto;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.ObjectUtils;
+
+import com.mtaketani.crypto.exception.CryptoException;
 
 public class CryptoAes {
 
@@ -16,7 +26,7 @@ public class CryptoAes {
 
   /**
    * <p>暗号化メソッド。</p>
-   * 暗号化に失敗した場合は、{@code null}を返却。
+   * 暗号化に失敗した場合は、{@code CryptoException}を返却。
    *
    * @param text 暗号化する文字列
    * @return 暗号化文字列
@@ -44,16 +54,16 @@ public class CryptoAes {
       // Base64へエンコードして暗号化文字列を返却
       return Base64.encodeBase64String(byteResult);
 
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (UnsupportedEncodingException | NoSuchAlgorithmException
+      | NoSuchPaddingException | IllegalBlockSizeException
+      | BadPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
+      throw new CryptoException(e);
     }
-    // null
-    return null;
   }
 
   /**
    * <p>復号化メソッド</p>
-   * 復号化に失敗した場合は、{@code null}を返却。
+   * 復号化に失敗した場合は、{@code CryptoException}を返却。
    *
    * @param encryptText 復号化する文字列
    * @return 復号化文字列
@@ -81,9 +91,10 @@ public class CryptoAes {
       // バイト配列を文字列へ変換して復号化文字列を返却
       return new String(byteResult, "UTF-8");
 
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (UnsupportedEncodingException | IllegalBlockSizeException
+      | BadPaddingException | InvalidKeyException | InvalidAlgorithmParameterException
+      | NoSuchAlgorithmException | NoSuchPaddingException e) {
+      throw new CryptoException(e);
     }
-    return null;
   }
 }

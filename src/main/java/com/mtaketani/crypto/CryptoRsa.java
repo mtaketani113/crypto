@@ -1,22 +1,31 @@
 package com.mtaketani.crypto;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 import org.apache.commons.codec.binary.Base64;
+
+import com.mtaketani.crypto.exception.CryptoException;
 
 public class CryptoRsa {
 
   /**
    * <p>キーペア作成</p>
-   * 作成失敗した場合は、{@code null}を返却。
+   * 作成失敗した場合は、{@code CryptoException}を返却。
    * 
    * @return 暗号化文字列
    */
@@ -36,15 +45,14 @@ public class CryptoRsa {
       keyPairRsa.setPrivateKey(privateKey);
       keyPairRsa.setPublicKey(publicKey);
       return keyPairRsa;
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+      throw new CryptoException(e);
     }
-    return null;
   }
 
   /**
    * <p>公開鍵で暗号化</p>
-   * 暗号化に失敗した場合は、{@code null}を返却。
+   * 暗号化に失敗した場合は、{@code CryptoException}を返却。
    *
    * @param text 暗号化する文字列
    * @param text 公開鍵
@@ -57,15 +65,15 @@ public class CryptoRsa {
       encrypter.init(Cipher.ENCRYPT_MODE, key);
       byte[] encrypted = encrypter.doFinal(text.getBytes());
       return  Base64.encodeBase64String(encrypted);
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (NoSuchAlgorithmException | NoSuchPaddingException
+      | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
+      throw new CryptoException(e);
     }
-    return null;
   }
 
   /**
    * <p>秘密鍵で暗号化</p>
-   * 暗号化に失敗した場合は、{@code null}を返却。
+   * 暗号化に失敗した場合は、{@code CryptoException}を返却。
    * 
    * @param text 暗号化する文字列
    * @param key 秘密鍵
@@ -78,15 +86,15 @@ public class CryptoRsa {
       encrypter.init(Cipher.ENCRYPT_MODE, key);
       byte[] encrypted = encrypter.doFinal(text.getBytes());
       return  Base64.encodeBase64String(encrypted);
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (NoSuchAlgorithmException | NoSuchPaddingException
+      | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
+      throw new CryptoException(e);
     }
-    return null;
   }
 
   /**
    * <p>公開鍵で復号化</p>
-   * 復号化に失敗した場合は、{@code null}を返却。
+   * 復号化に失敗した場合は、{@code CryptoException}を返却。
    *
    * @param encryptText 復号化する文字列
    * @param text 公開鍵
@@ -99,16 +107,16 @@ public class CryptoRsa {
       dencrypter.init(Cipher.DECRYPT_MODE, key);
       byte[] dencrypted = dencrypter.doFinal(Base64.decodeBase64(encryptText));
       return  new String(dencrypted, "UTF-8");
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (NoSuchAlgorithmException | NoSuchPaddingException
+      | InvalidKeyException | IllegalBlockSizeException
+      | BadPaddingException | UnsupportedEncodingException e) {
+      throw new CryptoException(e);
     }
-    return null;
-
   }
 
     /**
    * <p>秘密鍵で復号化</p>
-   * 復号化に失敗した場合は、{@code null}を返却。
+   * 復号化に失敗した場合は、{@code CryptoException}を返却。
    *
    * @param encryptText 復号化する文字列
    * @param text 秘密鍵
@@ -121,9 +129,10 @@ public class CryptoRsa {
       dencrypter.init(Cipher.DECRYPT_MODE, key);
       byte[] dencrypted = dencrypter.doFinal(Base64.decodeBase64(encryptText));
       return  new String(dencrypted, "UTF-8");
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (NoSuchAlgorithmException | NoSuchPaddingException
+      | InvalidKeyException | IllegalBlockSizeException
+      | BadPaddingException | UnsupportedEncodingException e) {
+      throw new CryptoException(e);
     }
-    return null;
   }
 }
