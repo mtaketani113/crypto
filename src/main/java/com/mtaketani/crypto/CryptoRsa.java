@@ -41,9 +41,9 @@ public class CryptoRsa {
       RSAPrivateKeySpec privateKeySpec = factoty.getKeySpec(keyPair.getPrivate(), RSAPrivateKeySpec.class);
       PublicKey publicKey = factoty.generatePublic(publicKeySpec);
       PrivateKey privateKey = factoty.generatePrivate(privateKeySpec);
-      KeyPairRsa keyPairRsa = new KeyPairRsa();
-      keyPairRsa.setPrivateKey(privateKey);
-      keyPairRsa.setPublicKey(publicKey);
+      KeyPairRsa keyPairRsa = KeyPairRsa.builder()
+        .privateKey(privateKey)
+        .publicKey(publicKey).build();
       return keyPairRsa;
     } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
       throw new CryptoException(e);
