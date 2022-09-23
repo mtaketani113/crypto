@@ -37,7 +37,6 @@ public class CryptoRsa {
       keyPairRsa.setPublicKey(publicKey);
       return keyPairRsa;
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return null;
@@ -59,7 +58,6 @@ public class CryptoRsa {
       byte[] encrypted = encrypter.doFinal(text.getBytes());
       return  Base64.encodeBase64String(encrypted);
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return null;
@@ -81,7 +79,6 @@ public class CryptoRsa {
       byte[] encrypted = encrypter.doFinal(text.getBytes());
       return  Base64.encodeBase64String(encrypted);
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return null;
@@ -103,7 +100,6 @@ public class CryptoRsa {
       byte[] dencrypted = dencrypter.doFinal(Base64.decodeBase64(encryptText));
       return  new String(dencrypted, "UTF-8");
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return null;
@@ -126,7 +122,6 @@ public class CryptoRsa {
       byte[] dencrypted = dencrypter.doFinal(Base64.decodeBase64(encryptText));
       return  new String(dencrypted, "UTF-8");
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return null;
