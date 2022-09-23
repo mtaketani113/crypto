@@ -15,7 +15,7 @@ public class CryptoHash {
 
   /**
    * <p>SHA-256の暗号化メソッド。</p>
-   * 暗号化に失敗した場合は、{@code CryptoException}を返却。
+   * 暗号化に失敗した場合は、{@code CryptoException}をthrow。
    *
    * @param text 暗号化する文字列
    * @return 暗号化文字列

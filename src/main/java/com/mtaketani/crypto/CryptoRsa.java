@@ -25,7 +25,7 @@ public class CryptoRsa {
 
   /**
    * <p>キーペア作成</p>
-   * 作成失敗した場合は、{@code CryptoException}を返却。
+   * 作成失敗した場合は、{@code CryptoException}をthrow。
    * 
    * @return 暗号化文字列
    */
@@ -52,7 +52,7 @@ public class CryptoRsa {
 
   /**
    * <p>公開鍵で暗号化</p>
-   * 暗号化に失敗した場合は、{@code CryptoException}を返却。
+   * 暗号化に失敗した場合は、{@code CryptoException}をthrow。
    *
    * @param text 暗号化する文字列
    * @param text 公開鍵
@@ -73,7 +73,7 @@ public class CryptoRsa {
 
   /**
    * <p>秘密鍵で暗号化</p>
-   * 暗号化に失敗した場合は、{@code CryptoException}を返却。
+   * 暗号化に失敗した場合は、{@code CryptoException}をthrow。
    * 
    * @param text 暗号化する文字列
    * @param key 秘密鍵
@@ -94,7 +94,7 @@ public class CryptoRsa {
 
   /**
    * <p>公開鍵で復号化</p>
-   * 復号化に失敗した場合は、{@code CryptoException}を返却。
+   * 復号化に失敗した場合は、{@code CryptoException}をthrow。
    *
    * @param encryptText 復号化する文字列
    * @param text 公開鍵
@@ -116,7 +116,7 @@ public class CryptoRsa {
 
     /**
    * <p>秘密鍵で復号化</p>
-   * 復号化に失敗した場合は、{@code CryptoException}を返却。
+   * 復号化に失敗した場合は、{@code CryptoException}をthrow。
    *
    * @param encryptText 復号化する文字列
    * @param text 秘密鍵

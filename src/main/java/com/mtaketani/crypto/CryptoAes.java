@@ -26,7 +26,7 @@ public class CryptoAes {
 
   /**
    * <p>暗号化メソッド。</p>
-   * 暗号化に失敗した場合は、{@code CryptoException}を返却。
+   * 暗号化に失敗した場合は、{@code CryptoException}をthrow。
    *
    * @param text 暗号化する文字列
    * @return 暗号化文字列
@@ -63,7 +63,7 @@ public class CryptoAes {
 
   /**
    * <p>復号化メソッド</p>
-   * 復号化に失敗した場合は、{@code CryptoException}を返却。
+   * 復号化に失敗した場合は、{@code CryptoException}をthrow。
    *
    * @param encryptText 復号化する文字列
    * @return 復号化文字列
