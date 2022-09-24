@@ -28,6 +28,16 @@ class CryptRsaTest {
     }
 
     @Test
+    void 秘密鍵で複数回暗号化しても同一かのテスト() {
+
+        KeyPairRsa keyPairRsa = CryptoRsa.createKeyPair();
+
+        String encryptoText1 = CryptoRsa.encryptoByPrivate("test", keyPairRsa.getPrivateKey());
+        String encryptoText2 = CryptoRsa.encryptoByPrivate("test", keyPairRsa.getPrivateKey());
+        assertEquals(encryptoText1, encryptoText2);
+    }
+
+    @Test
     void 秘密鍵で暗号化ー秘密鍵復号化でException発生() {
 
         KeyPairRsa keyPairRsa = CryptoRsa.createKeyPair();
