@@ -11,6 +11,7 @@ import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
+import java.util.Objects;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -58,8 +59,9 @@ public class CryptoRsa {
    * @param text 公開鍵
    * @return 暗号化文字列
    */
-  public static String encryptoByPbulic(String text, PublicKey key) {
-
+  public static String encryptoByPublic(String text, PublicKey key) {
+    Objects.requireNonNull(text, "textはnullを指定できませません。");
+    Objects.requireNonNull(key, "keyはnullを指定できませません。");
     try {
       Cipher encrypter = Cipher.getInstance("RSA/ECB/PKCS1Padding");
       encrypter.init(Cipher.ENCRYPT_MODE, key);
@@ -80,7 +82,8 @@ public class CryptoRsa {
    * @return 暗号化文字列
    */
   public static String encryptoByPrivate(String text, PrivateKey key) {
-
+    Objects.requireNonNull(text, "textはnullを指定できませません。");
+    Objects.requireNonNull(key, "keyはnullを指定できませません。");
     try {
       Cipher encrypter = Cipher.getInstance("RSA/ECB/PKCS1Padding");
       encrypter.init(Cipher.ENCRYPT_MODE, key);
@@ -100,12 +103,13 @@ public class CryptoRsa {
    * @param text 公開鍵
    * @return 復号化文字列
    */
-  public static String decryptoByPublic(String encryptText, PublicKey key) {
-
+  public static String decryptoByPublic(String encryptoText, PublicKey key) {
+    Objects.requireNonNull(encryptoText, "encryptoTextはnullを指定できませません。");
+    Objects.requireNonNull(key, "keyはnullを指定できませません。");
     try {
       Cipher dencrypter = Cipher.getInstance("RSA/ECB/PKCS1Padding");
       dencrypter.init(Cipher.DECRYPT_MODE, key);
-      byte[] dencrypted = dencrypter.doFinal(Base64.decodeBase64(encryptText));
+      byte[] dencrypted = dencrypter.doFinal(Base64.decodeBase64(encryptoText));
       return  new String(dencrypted, "UTF-8");
     } catch (NoSuchAlgorithmException | NoSuchPaddingException
       | InvalidKeyException | IllegalBlockSizeException
@@ -122,12 +126,13 @@ public class CryptoRsa {
    * @param text 秘密鍵
    * @return 復号化文字列
    */
-  public static String decryptoByPrivate(String encryptText, PrivateKey key) {
-
+  public static String decryptoByPrivate(String encryptoText, PrivateKey key) {
+    Objects.requireNonNull(encryptoText, "encryptoTextはnullを指定できませません。");
+    Objects.requireNonNull(key, "keyはnullを指定できませません。");
     try {
       Cipher dencrypter = Cipher.getInstance("RSA/ECB/PKCS1Padding");
       dencrypter.init(Cipher.DECRYPT_MODE, key);
-      byte[] dencrypted = dencrypter.doFinal(Base64.decodeBase64(encryptText));
+      byte[] dencrypted = dencrypter.doFinal(Base64.decodeBase64(encryptoText));
       return  new String(dencrypted, "UTF-8");
     } catch (NoSuchAlgorithmException | NoSuchPaddingException
       | InvalidKeyException | IllegalBlockSizeException

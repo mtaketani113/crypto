@@ -2,6 +2,7 @@ package com.mtaketani.crypto;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.ObjectUtils;
@@ -21,7 +22,7 @@ public class CryptoHash {
    * @return 暗号化文字列
    */
   public static String cryptoSha256(String text) {
-
+    Objects.requireNonNull(text, "textはnullを指定できませません。");
     // Saltを追加
     String textWithSalt = text + FIXED_SALT;
     // ハッシュ化

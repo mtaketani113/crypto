@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -32,6 +33,7 @@ public class CryptoAes {
    * @return 暗号化文字列
    */
   public static String encrypto(String text) {
+    Objects.requireNonNull(text, "textはnullを指定できませません。");
 
     try {
       // 暗号化キーと初期化ベクトルをバイト配列へ変換
@@ -68,7 +70,8 @@ public class CryptoAes {
    * @param encryptText 復号化する文字列
    * @return 復号化文字列
    */
-  public static String decrypto(String encryptText) {
+  public static String decrypto(String encryptoText) {
+    Objects.requireNonNull(encryptoText, "encryptoTextはnullを指定できませません。");
 
     try {
       // 暗号化キーと初期化ベクトルをバイト配列へ変換
@@ -86,7 +89,7 @@ public class CryptoAes {
       cipher.init(Cipher.DECRYPT_MODE, key, iv);
 
       // 復号化の結果取得
-      byte[] byteResult = cipher.doFinal(Base64.decodeBase64(encryptText));
+      byte[] byteResult = cipher.doFinal(Base64.decodeBase64(encryptoText));
 
       // バイト配列を文字列へ変換して復号化文字列を返却
       return new String(byteResult, "UTF-8");
