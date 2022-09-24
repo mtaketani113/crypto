@@ -12,7 +12,7 @@ class CryptRsaTest {
 
         KeyPairRsa keyPairRsa = CryptoRsa.createKeyPair();
 
-        String encryptoText = CryptoRsa.encryptoByPbulic("test", keyPairRsa.getPublicKey());
+        String encryptoText = CryptoRsa.encryptoByPublic("test", keyPairRsa.getPublicKey());
         String decryptoText = CryptoRsa.decryptoByPrivate(encryptoText, keyPairRsa.getPrivateKey());
         assertEquals("test", decryptoText);
     }
@@ -42,8 +42,55 @@ class CryptRsaTest {
 
         KeyPairRsa keyPairRsa = CryptoRsa.createKeyPair();
 
-        String encryptoText = CryptoRsa.encryptoByPbulic("test", keyPairRsa.getPublicKey());
+        String encryptoText = CryptoRsa.encryptoByPublic("test", keyPairRsa.getPublicKey());
         assertThrows(CryptoException.class
             , () -> CryptoRsa.decryptoByPublic(encryptoText, keyPairRsa.getPublicKey()));
+    }
+
+
+    @Test
+    void 引数Nullテスト_秘密鍵() {
+
+        KeyPairRsa keyPairRsa = CryptoRsa.createKeyPair();
+
+        // 秘密鍵の暗号化のテスト
+        Throwable exceptionEncryptoByPrivate = assertThrows(NullPointerException.class
+            , () -> CryptoRsa.encryptoByPrivate(null, keyPairRsa.getPrivateKey()));
+        assertEquals("textはnullを指定できませません。", exceptionEncryptoByPrivate.getMessage());
+        exceptionEncryptoByPrivate = assertThrows(NullPointerException.class
+            , () -> CryptoRsa.encryptoByPrivate("test", null));
+        assertEquals("keyはnullを指定できませません。", exceptionEncryptoByPrivate.getMessage());
+        
+        // 秘密鍵の復号かのテスト
+        Throwable exceptionDecryptoByPrivate = assertThrows(NullPointerException.class
+            , () -> CryptoRsa.decryptoByPrivate(null, keyPairRsa.getPrivateKey()));
+        assertEquals("encryptoTextはnullを指定できませません。", exceptionDecryptoByPrivate.getMessage());
+        exceptionDecryptoByPrivate = assertThrows(NullPointerException.class
+            , () -> CryptoRsa.decryptoByPrivate("test", null));
+        assertEquals("keyはnullを指定できませません。", exceptionDecryptoByPrivate.getMessage());
+    
+    }
+
+    @Test
+    void 引数Nullテスト_公開鍵() {
+
+        KeyPairRsa keyPairRsa = CryptoRsa.createKeyPair();
+
+        // 公開鍵の暗号化のテスト
+        Throwable exceptionEncryptoByPublic = assertThrows(NullPointerException.class
+            , () -> CryptoRsa.encryptoByPublic(null, keyPairRsa.getPublicKey()));
+        assertEquals("textはnullを指定できませません。", exceptionEncryptoByPublic.getMessage());
+        exceptionEncryptoByPublic = assertThrows(NullPointerException.class
+            , () -> CryptoRsa.encryptoByPublic("test", null));
+        assertEquals("keyはnullを指定できませません。", exceptionEncryptoByPublic.getMessage());
+        
+        // 公開鍵の復号かのテスト
+        Throwable exceptionDecryptoByPublic = assertThrows(NullPointerException.class
+            , () -> CryptoRsa.decryptoByPrivate(null, keyPairRsa.getPrivateKey()));
+        assertEquals("encryptoTextはnullを指定できませません。", exceptionDecryptoByPublic.getMessage());
+        exceptionDecryptoByPublic = assertThrows(NullPointerException.class
+            , () -> CryptoRsa.decryptoByPublic("test", null));
+        assertEquals("keyはnullを指定できませません。", exceptionDecryptoByPublic.getMessage());
+    
     }
 }

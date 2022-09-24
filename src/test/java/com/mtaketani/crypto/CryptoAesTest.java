@@ -10,4 +10,14 @@ class CryptAesTest {
         String decryptoText = CryptoAes.decrypto(encryptoText);
         assertEquals("test", decryptoText);
     }
+
+    @Test
+    void 引数Nullテスト() {
+        Throwable exceptionEncrypto = assertThrows(NullPointerException.class
+            , () -> CryptoAes.encrypto(null));
+        assertEquals("textはnullを指定できませません。", exceptionEncrypto.getMessage());
+        Throwable exceptionDecrypto = assertThrows(NullPointerException.class
+            , () -> CryptoAes.decrypto(null));
+        assertEquals("encryptoTextはnullを指定できませません。", exceptionDecrypto.getMessage());
+    }
 }

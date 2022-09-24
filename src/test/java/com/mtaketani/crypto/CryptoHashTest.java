@@ -16,4 +16,10 @@ class CryptHashTest {
         String encrypto2 = CryptoHash.cryptoSha256("test");
         assertEquals(encrypto1, encrypto2);
     }
+    @Test
+    void 引数Nullテスト() {
+        Throwable exceptionEncrypto = assertThrows(NullPointerException.class
+            , () -> CryptoHash.cryptoSha256(null));
+        assertEquals("textはnullを指定できませません。", exceptionEncrypto.getMessage());
+    }
 }
