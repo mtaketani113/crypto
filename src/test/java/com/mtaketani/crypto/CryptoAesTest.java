@@ -12,6 +12,13 @@ class CryptAesTest {
     }
 
     @Test
+    void 複数回暗号化しても同一であるかのテスト() {
+        String encryptoText1 = CryptoAes.encrypto("test");
+        String encryptoText2 = CryptoAes.encrypto("test");
+        assertEquals(encryptoText1, encryptoText2);
+    }
+
+    @Test
     void 引数Nullテスト() {
         Throwable exceptionEncrypto = assertThrows(NullPointerException.class
             , () -> CryptoAes.encrypto(null));
