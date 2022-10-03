@@ -16,8 +16,8 @@ group 'com.mtaketani'
 archivesBaseName = 'crypto'
 version '0.4.0'
 
-sourceCompatibility = 18
-targetCompatibility = 18
+sourceCompatibility = 17
+targetCompatibility = 17
 
 repositories {
     // Use Maven Central for resolving dependencies.
