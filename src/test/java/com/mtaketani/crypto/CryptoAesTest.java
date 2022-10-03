@@ -22,9 +22,9 @@ class CryptAesTest {
     void 引数Nullテスト() {
         Throwable exceptionEncrypto = assertThrows(NullPointerException.class
             , () -> CryptoAes.encrypto(null));
-        assertEquals("textはnullを指定できませません。", exceptionEncrypto.getMessage());
+        assertEquals("textはnullを指定できません。", exceptionEncrypto.getMessage());
         Throwable exceptionDecrypto = assertThrows(NullPointerException.class
             , () -> CryptoAes.decrypto(null));
-        assertEquals("encryptoTextはnullを指定できませません。", exceptionDecrypto.getMessage());
+        assertEquals("encryptoTextはnullを指定できません。", exceptionDecrypto.getMessage());
     }
 }

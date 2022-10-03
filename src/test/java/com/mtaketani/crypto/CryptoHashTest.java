@@ -20,6 +20,6 @@ class CryptHashTest {
     void 引数Nullテスト() {
         Throwable exceptionEncrypto = assertThrows(NullPointerException.class
             , () -> CryptoHash.cryptoSha256(null));
-        assertEquals("textはnullを指定できませません。", exceptionEncrypto.getMessage());
+        assertEquals("textはnullを指定できません。", exceptionEncrypto.getMessage());
     }
 }
