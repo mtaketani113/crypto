@@ -11,6 +11,8 @@ import com.mtaketani.crypto.exception.CryptoException;
 
 public class CryptoHash {
 
+  private static final String NULL_MESSAGE = "はnullを指定できません。";
+
   private static final String FIXED_SALT =
       ObjectUtils.defaultIfNull(System.getenv("crypto.hash.salt"), "1234567890123456");
 
@@ -22,7 +24,7 @@ public class CryptoHash {
    * @return 暗号化文字列
    */
   public static String cryptoSha256(String text) {
-    Objects.requireNonNull(text, "textはnullを指定できませません。");
+    Objects.requireNonNull(text, "text" + NULL_MESSAGE);
     // Saltを追加
     String textWithSalt = text + FIXED_SALT;
     // ハッシュ化

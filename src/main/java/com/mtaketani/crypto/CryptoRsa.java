@@ -24,6 +24,8 @@ import com.mtaketani.crypto.exception.CryptoException;
 
 public class CryptoRsa {
 
+  private static final String NULL_MESSAGE = "はnullを指定できません。";
+
   /**
    * <p>キーペア作成</p>
    * 作成失敗した場合は、{@code CryptoException}をthrow。
@@ -60,8 +62,8 @@ public class CryptoRsa {
    * @return 暗号化文字列
    */
   public static String encryptoByPublic(String text, PublicKey key) {
-    Objects.requireNonNull(text, "textはnullを指定できませません。");
-    Objects.requireNonNull(key, "keyはnullを指定できませません。");
+    Objects.requireNonNull(text, "text" + NULL_MESSAGE);
+    Objects.requireNonNull(key, "key" + NULL_MESSAGE);
     try {
       Cipher encrypter = Cipher.getInstance("RSA/ECB/PKCS1Padding");
       encrypter.init(Cipher.ENCRYPT_MODE, key);
@@ -82,8 +84,8 @@ public class CryptoRsa {
    * @return 暗号化文字列
    */
   public static String encryptoByPrivate(String text, PrivateKey key) {
-    Objects.requireNonNull(text, "textはnullを指定できませません。");
-    Objects.requireNonNull(key, "keyはnullを指定できませません。");
+    Objects.requireNonNull(text, "text" + NULL_MESSAGE);
+    Objects.requireNonNull(key, "key" + NULL_MESSAGE);
     try {
       Cipher encrypter = Cipher.getInstance("RSA/ECB/PKCS1Padding");
       encrypter.init(Cipher.ENCRYPT_MODE, key);
@@ -104,8 +106,8 @@ public class CryptoRsa {
    * @return 復号化文字列
    */
   public static String decryptoByPublic(String encryptoText, PublicKey key) {
-    Objects.requireNonNull(encryptoText, "encryptoTextはnullを指定できませません。");
-    Objects.requireNonNull(key, "keyはnullを指定できませません。");
+    Objects.requireNonNull(encryptoText, "encryptoText" + NULL_MESSAGE);
+    Objects.requireNonNull(key, "key" + NULL_MESSAGE);
     try {
       Cipher dencrypter = Cipher.getInstance("RSA/ECB/PKCS1Padding");
       dencrypter.init(Cipher.DECRYPT_MODE, key);
@@ -127,8 +129,8 @@ public class CryptoRsa {
    * @return 復号化文字列
    */
   public static String decryptoByPrivate(String encryptoText, PrivateKey key) {
-    Objects.requireNonNull(encryptoText, "encryptoTextはnullを指定できませません。");
-    Objects.requireNonNull(key, "keyはnullを指定できませません。");
+    Objects.requireNonNull(encryptoText, "encryptoText" + NULL_MESSAGE);
+    Objects.requireNonNull(key, "key" + NULL_MESSAGE);
     try {
       Cipher dencrypter = Cipher.getInstance("RSA/ECB/PKCS1Padding");
       dencrypter.init(Cipher.DECRYPT_MODE, key);

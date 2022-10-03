@@ -20,6 +20,8 @@ import com.mtaketani.crypto.exception.CryptoException;
 
 public class CryptoAes {
 
+  private static final String NULL_MESSAGE = "はnullを指定できません。";
+  
   private static final String ENCRYPT_KEY =
       ObjectUtils.defaultIfNull(System.getenv("crypto.aes.key"), "1234567890123456");
   private static final String ENCRYPT_IV =
@@ -33,7 +35,7 @@ public class CryptoAes {
    * @return 暗号化文字列
    */
   public static String encrypto(String text) {
-    Objects.requireNonNull(text, "textはnullを指定できませません。");
+    Objects.requireNonNull(text, "text" + NULL_MESSAGE);
 
     try {
       // 暗号化キーと初期化ベクトルをバイト配列へ変換
@@ -71,7 +73,7 @@ public class CryptoAes {
    * @return 復号化文字列
    */
   public static String decrypto(String encryptoText) {
-    Objects.requireNonNull(encryptoText, "encryptoTextはnullを指定できませません。");
+    Objects.requireNonNull(encryptoText, "encryptoText" + NULL_MESSAGE);
 
     try {
       // 暗号化キーと初期化ベクトルをバイト配列へ変換
